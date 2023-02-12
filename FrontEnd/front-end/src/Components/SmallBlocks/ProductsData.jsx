@@ -24,7 +24,6 @@ const ProductsData = ({ data, cartIds, addedCart, setAddedCart }) => {
           console.error(err);
         });
     };
-  console.log(cartIds, data);
   return (
     <div className="Container">
       <img src={data?.image} alt="" />
@@ -62,14 +61,6 @@ const ProductsData = ({ data, cartIds, addedCart, setAddedCart }) => {
               className="Cart"
             >
               Add To Cart
-            </button>
-            <button
-              onClick={() => {
-                console.log("wanna Buy Now");
-              }}
-              className="BuyNow"
-            >
-              Buy Now
             </button>
           </>
         )}

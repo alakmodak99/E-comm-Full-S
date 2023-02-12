@@ -6,23 +6,26 @@ import { CartItemsIds } from "./utills";
 const Url = "http://localhost:8081";
 const AllProducts = () => {
   const [data, setData] = useState([]);
+  const [loader, setLoader]= useState(false)
   const [cartItems, setCartItems]= useState([]);
-  const [addedtoCart, setAddedToCart] = useState(false)
+  const [addedtoCart, setAddedToCart] = useState(false);
       const getCartData = () => {
+        setLoader(true)
         axios
           .get(`${Url}/cartItems`)
           .then((res) => {
-            setCartItems(CartItemsIds(res?.data?.data?.[0].product));
-            // console.log(, "cart");
+            setCartItems(CartItemsIds(res?.data?.data?.[0]?.product));
           })
           .catch((err) => {
             console.error(err);
           });
+          setLoader(false)
       };
       useEffect(()=>{
         getCartData();
       },[addedtoCart])
   const getData = () => {
+    setLoader(true);
     axios
       .get(`${Url}/products`)
       .then((res) => {
@@ -31,10 +34,14 @@ const AllProducts = () => {
       .catch((err) => {
         console.error(err);
       });
+      setLoader(false)
   };
   useEffect(() => {
     getData();
   }, []);
+    if (loader) {
+      return <div className="loader">Loading...</div>;
+    }
   return (
     <div className="FirstContainer">
       {data?.map((e, i) => {

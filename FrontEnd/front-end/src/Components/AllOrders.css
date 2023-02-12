@@ -1,0 +1,16 @@
+.text{
+    display: flex;
+    width: 48%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 20px;
+    background-color: rgb(188, 191, 193);
+    padding: 10px 12px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}

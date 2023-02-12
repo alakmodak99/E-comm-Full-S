@@ -10,7 +10,7 @@ route.get("/", async(req,res)=>{
         return res.status(400).send({erorr:true,message:err.message})
     }
 } )
-route.get("/validateCoupon", async (req, res) => {
+route.post("/validateCoupon", async (req, res) => {
   try {
     return res.status(200).send(await Coupon.find({coupon: req.body.coupon}));
   } catch (err) {
@@ -22,7 +22,7 @@ route.post("/", async(req,res)=>{
       coupon: voucher_codes.generate({
         length: 5,
         count: 1,
-      })[0],
+      })?.[0],
     };
     return res.status(200).send(await Coupon.create(data))
 })
