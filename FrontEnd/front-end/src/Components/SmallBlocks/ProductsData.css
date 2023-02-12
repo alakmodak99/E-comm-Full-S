@@ -1,0 +1,66 @@
+
+.Container{
+    width: 300px;
+    height: 500px;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 14px 10px 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.Container > img{
+    width: 96%;
+    background-color: rgb(130, 128, 126);
+    margin: auto;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.textContainer{
+ text-align: left;
+ padding-left: 10px;
+ color: rgb(71, 70, 69);
+}
+.price{
+    color: green;
+}
+.Cart, .BuyNow, .RemoveCart{
+    width: 48%;
+    border-radius: 10px;
+    padding: 12px 0px;
+    background-color: rgb(182, 170, 37);
+    color: aliceblue;
+    font-weight: 500px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.BuyNow{
+    background-color: rgb(32, 158, 167);
+    margin-left: 5px;
+}
+.AddedToCart{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.AddedToCart >div{
+    font-size: 13px;
+    color: rgb(63, 65, 68);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.RemoveCart{
+    background-color: black;
+    color: white;
+}
+.RemoveCart:hover{
+    background-color: white;
+    color: black;
+}

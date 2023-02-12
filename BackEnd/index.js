@@ -4,12 +4,14 @@ const app = express()
 const cors=require("cors")
 const port = process.env.PORT || 8081
 const connect = require("./Config/db")
-const CartController = require("./Controller/Cart.Controller")
+const CartController = require("./Controller/Cart.Controller");
+const OrderController = require("./Controller/Order.Controller");
 const CouponController= require("./Controller/Coupon.Controller")
 const ProductController = require("./Controller/Products.Controller")
 app.use(express.json())
 app.use(cors())
 app.use("/cartItems", CartController)
+app.use("/orders", OrderController);
 app.use("/coupon", CouponController);
 app.use("/products", ProductController)
 

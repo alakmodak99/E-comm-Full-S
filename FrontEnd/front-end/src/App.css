@@ -1,7 +1,11 @@
 .App {
   text-align: center;
 }
-
+*{
+  box-sizing: border-box;
+  animation: 1s linear 1 1s;
+  -webkit-animation: 1s linear 1 1s;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
