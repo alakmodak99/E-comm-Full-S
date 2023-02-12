@@ -5,7 +5,7 @@ import { CartItemsIds } from "./utills";
 import ProductsData from "./SmallBlocks/ProductsData";
 import { totalAmountToPay } from "./utills";
 import { useNavigate } from "react-router";
-const Url = "http://localhost:8081";
+const Url = "https://e-comm-server-1.onrender.com";
 const CheckOutPage = () => {
   const [cartData, setCartData] = useState([]);
   const [cartItemIds, setCartItemIds] = useState([]);
@@ -29,11 +29,13 @@ const CheckOutPage = () => {
         setCartData(res?.data?.data?.[0]?.product);
         setTotal(res?.data?.TotalItems);
         setTotalAmount(totalAmountToPay(res?.data?.data?.[0]?.product));
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-    setLoader(false);
+    
   };
   const getAllOrders = () => {
     setLoader(true);
@@ -41,21 +43,21 @@ const CheckOutPage = () => {
       .get(`${Url}/orders`)
       .then((res) => {
         setOrderCount(res?.data?.length);
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-    setLoader(false);
+    
   };
   const valiDateCoupon = () => {
-    setLoader(true);
     const payLoad = {
       coupon: couponValue,
     };
     axios
       .post(`${Url}/coupon/validateCoupon`, payLoad)
       .then((res) => {
-        console.log(res?.data);
         if (res?.data?.length && !res?.data?.[0]?.used) {
           setValidate(true);
           setCouponValue("");
@@ -66,11 +68,12 @@ const CheckOutPage = () => {
           setValidate(false);
           setErr(true);
         }
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-    setLoader(false);
   };
   const CompleteOrder = () => {
     setLoader(true);
@@ -92,33 +95,37 @@ const CheckOutPage = () => {
           getNewCoupon();
         }
         navigate("/");
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-    setLoader(false);
   };
   const getNewCoupon = () => {
     setLoader(true);
     axios
       .post(`${Url}/coupon`)
       .then((res) => {
+        setLoader(false);
         alert("Congratulations!! You have Got a new Coupon");
       })
       .catch((err) => {
+        setLoader(false);
         console.error(err);
       });
-    setLoader(false);
   };
   const UpdateCoupon = () => {
     setLoader(true);
     axios
       .patch(`${Url}/coupon/${usedCoupon?._id}`, { used: true })
-      .then((err) => {})
+      .then((err) => {
+        setLoader(false);
+      })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-    setLoader(false);
   };
   useEffect(() => {
     getAllOrders();
@@ -127,7 +134,7 @@ const CheckOutPage = () => {
     getCartData();
   }, [removed]);
   if (loader) {
-    return <div className="loader">Loading...</div>;
+    return <div>Loading...</div>;
   }
   if (!cartData?.length) return <>Plesae Add Some Items to the Cart</>;
   return (

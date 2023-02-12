@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "./ProductsData.css"
 import axios from "axios"
-const Url = "http://localhost:8081";
+const Url = "https://e-comm-server-1.onrender.com";
 const ProductsData = ({ data, cartIds, addedCart, setAddedCart }) => {
   const isAddedToTheCart = cartIds.includes(data?._id);
   const AddToCart = (id) => {

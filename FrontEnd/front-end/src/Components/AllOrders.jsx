@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import "./AllOrders.css";
-const Url = "http://localhost:8081";
+const Url = "https://e-comm-server-1.onrender.com";
 const AllOrders = () => {
-    const [data, setData]= useState([])
+    const [data, setData]= useState([]);
+    const [loader, setLoader]= useState(false)
       const getAllOrders = () => {
+        setLoader(true)
         axios
           .get(`${Url}/orders`)
           .then((res) => {
             setData(res?.data);
+            setLoader(false)
           })
           .catch((err) => {
             console.error(err);
+            setLoader(false);
           });
       };
       useEffect(()=>{
         getAllOrders()
       },[])
+      if(loader) return <>Loading...</>
   return (
     <div>
       <b>No. of Orders : </b>

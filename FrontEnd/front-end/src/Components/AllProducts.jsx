@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AllProducts.css"
 import ProductsData from "./SmallBlocks/ProductsData";
 import { CartItemsIds } from "./utills";
-const Url = "http://localhost:8081";
+const Url = "https://e-comm-server-1.onrender.com";
 const AllProducts = () => {
   const [data, setData] = useState([]);
   const [loader, setLoader]= useState(false)
@@ -15,11 +15,13 @@ const AllProducts = () => {
           .get(`${Url}/cartItems`)
           .then((res) => {
             setCartItems(CartItemsIds(res?.data?.data?.[0]?.product));
+            setLoader(false);
           })
           .catch((err) => {
             console.error(err);
+            setLoader(false);
           });
-          setLoader(false)
+          
       };
       useEffect(()=>{
         getCartData();
@@ -30,17 +32,18 @@ const AllProducts = () => {
       .get(`${Url}/products`)
       .then((res) => {
         setData(res?.data);
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false);
       });
-      setLoader(false)
   };
   useEffect(() => {
     getData();
   }, []);
     if (loader) {
-      return <div className="loader">Loading...</div>;
+      return <div>Loading...</div>;
     }
   return (
     <div className="FirstContainer">
